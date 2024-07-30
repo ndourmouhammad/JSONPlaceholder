@@ -36,7 +36,7 @@ export class ArticleFormComponent implements OnChanges {
 
   onSubmit(): void {
     const articleData = this.articleForm.value;
-
+  
     Swal.fire({
       title: 'Êtes-vous sûr ?',
       text: 'Voulez-vous soumettre ces informations ?',
@@ -51,39 +51,48 @@ export class ArticleFormComponent implements OnChanges {
         if (this.article && this.article.id) {
           // Mise à jour de l'article existant
           this.articleService.updateArticle(this.article.id, articleData).subscribe(updatedArticle => {
-            Swal.fire(
-              'Mis à jour !',
-              'L\'article a été mis à jour avec succès.',
-              'success'
-            );
+            Swal.fire({
+              title: 'Mis à jour !',
+              text: 'L\'article a été mis à jour avec succès.',
+              icon: 'success',
+              timer: 2000,  // Duration in milliseconds
+              showConfirmButton: false
+            });
             this.articleSubmitted.emit(updatedArticle);
           }, error => {
-            Swal.fire(
-              'Erreur !',
-              'Une erreur est survenue lors de la mise à jour de l\'article.',
-              'error'
-            );
+            Swal.fire({
+              title: 'Erreur !',
+              text: 'Une erreur est survenue lors de la mise à jour de l\'article.',
+              icon: 'error',
+              timer: 2000,  // Duration in milliseconds
+              showConfirmButton: false
+            });
           });
         } else {
           // Création d'un nouvel article
           this.articleService.createArticle(articleData).subscribe(newArticle => {
-            Swal.fire(
-              'Créé !',
-              'L\'article a été créé avec succès.',
-              'success'
-            );
+            Swal.fire({
+              title: 'Créé !',
+              text: 'L\'article a été créé avec succès.',
+              icon: 'success',
+              timer: 2000,  // Duration in milliseconds
+              showConfirmButton: false
+            });
             this.articleSubmitted.emit(newArticle);
           }, error => {
-            Swal.fire(
-              'Erreur !',
-              'Une erreur est survenue lors de la création de l\'article.',
-              'error'
-            );
+            Swal.fire({
+              title: 'Erreur !',
+              text: 'Une erreur est survenue lors de la création de l\'article.',
+              icon: 'error',
+              timer: 2000,  // Duration in milliseconds
+              showConfirmButton: false
+            });
           });
         }
       }
     });
   }
+  
 }
 
 

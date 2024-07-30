@@ -59,13 +59,26 @@ export class ArticleListComponent implements OnInit {
       if (result.isConfirmed) {
         this.articleService.deleteArticle(id).subscribe(() => {
           this.articles = this.articles.filter(article => article.id !== id);
-          Swal.fire('Supprimé !', 'L\'article a été supprimé.', 'success');
+          Swal.fire({
+            title: 'Supprimé !',
+            text: 'L\'article a été supprimé.',
+            icon: 'success',
+            timer: 2000,  // Duration in milliseconds
+            showConfirmButton: false
+          });
         }, error => {
-          Swal.fire('Erreur !', 'Une erreur est survenue lors de la suppression de l\'article.', 'error');
+          Swal.fire({
+            title: 'Erreur !',
+            text: 'Une erreur est survenue lors de la suppression de l\'article.',
+            icon: 'error',
+            timer: 2000,  // Duration in milliseconds
+            showConfirmButton: false
+          });
         });
       }
     });
   }
+  
 
   onArticleAddedOrUpdated(article: any): void {
     this.loadArticles();
